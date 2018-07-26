@@ -64,40 +64,30 @@ Pool : userPool
     });
 }
 
-function checkValid(jwtToken)// Used to see if session has ended
-{ 
-    
-    var current_time = Date.now() / 1000;
-    if ( jwtToken.exp < current_time) 
-    {
-        return false
+function checkUser()
+{
+    var data = { UserPoolId : AdmimUserpoolID,
+        ClientId : AdminAppClientID
+    };
+    var userPool = new AmazonCognitoIdentity.CognitoUserPool(data);
+    var cognitoUser = userPool.getCurrentUser();
+
+    if (cognitoUser != null) {
+        cognitoUser.getSession(function(err, session) {
+            if (err) {
+                self.location="../index.html";
+                return;
+            }
+            console.log('session validity: ' + session.isValid());
+        });
     }
     else
     {
-        return true
-    }
-    
-    if(current_time-jwtToken.exp < 5000)
-    {
-        const userPool = new AWSCognito.CognitoUserPool({
-        UserPoolId: AdmimUserpoolID,
-        ClientId: AdminAppClientID
-        })
-
-        userPool.client.makeUnauthenticatedRequest('initiateAuth', {
-          ClientId: AdminAppClientID,
-          AuthFlow: 'REFRESH_TOKEN_AUTH',
-          AuthParameters: {
-            'REFRESH_TOKEN':localStorage.getItem("JwtToken")  // client refresh JWT
-          }
-        }, (err, authResult) => {
-          if (err) {
-             throw err
-          }
-          localStorage.setItem("JwtToken",authResult); // contains new session
-        })
+        self.location="../index.html";
     }
 }
+
+
 function whatUser(jwtToken) // checks what user it is, and whether or not it is a master user
 {
     const tokenParts = jwtToken.split('.');

@@ -28,23 +28,9 @@
     
     <script>
         $("#newUser").hide()
-        var intervals = window.setInterval(validity,1000);
+        checkUser();
+        var intervals = window.setInterval(checkUser,1000);
         
-        function validity()
-        {
-            if(checkValid(localStorage.getItem("JwtToken"))==false)
-            {
-                    self.location="../index.html"
-            }
-            if(whatUser(localStorage.getItem("JwtToken"))!="Demir")
-            {
-                $("#newUser").hide()
-            }
-            else
-            {
-                $("#newUser").show()
-            }
-        }  
         
     </script>
 </html>
