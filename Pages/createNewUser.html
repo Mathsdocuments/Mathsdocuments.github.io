@@ -1,0 +1,41 @@
+﻿<html>
+    <head>
+        <title> Mathdoc </title>
+        <link rel="stylesheet" href="../Css/Mainstyles.css">
+        <script src="../Js/aws-cognito.js"></script>
+        <script src="../Js/jquery.js"></script>
+        <script src="../Js/JS%20Main.js"></script>
+    </head>
+    <body>
+        <input id="Username" placeholder="Username">
+        <input id="pass" type="password" placeholder="Password">
+        <input id="confirmPass" type="password" placeholder="Confirm Password"><br>
+        <button onClick="CreateUser();">Create New User</button>
+    </body>
+    
+    <script>
+
+        var intervals = window.setInterval(validity,1000);
+        
+        function validity()
+        {
+            if(whatUser(localStorage.getItem("JwtToken"))!="Demir")
+                {
+                    self.location="../index.html"
+                }
+        }  
+        
+        function CreateUser()
+        {
+            if($("#pass").val()==$("#confirmPass").val())
+            {
+                createNewAdminUser($("#Username").val(),$("#pass").val(),"fake@email.com")
+            }
+            else
+            {
+                alert("Passwords don't match")
+            }
+        }
+        
+    </script>
+</html>

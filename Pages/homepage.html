@@ -1,0 +1,50 @@
+﻿<html>
+    <head>
+        <title> Mathdoc </title>
+        <link rel="stylesheet" href="../Css/Mainstyles.css">
+        <script src="../Js/aws-cognito.js"></script>
+        <script src="../Js/jquery.js"></script>
+        <script src="../Js/JS%20Main.js"></script>
+    </head>
+    <body>
+        <button id="newUser" onClick="window.open('createNewUser.html')" >Create New User</button>
+        <br>
+        <br>
+        <center>
+            <h1> <u> Material</u></h1>
+            <p> Auf dieser Seite findest du Mitschirften, Lösungsvorschläge der Turoriumsblätter und überarbeitete Lösungsvorschläge der Übungsblätter zu den Vorlesungen Analysis III, Numerik und Optimierung im Wintersemester 2018/2019.</p>
+            <h2> Analysis III</h2>
+            <table cellspacing="25">
+            <tr>
+                <td><ul><li><a  href="../PDFs/Schöne Beweise.pdf" target="_blank">Tutorium 1</a></li></ul></td>
+                <td><ul><li><span><a>Tutorium 2</a></span></li></ul></td>
+            </tr>
+            </table>
+            <h2> Numerik </h2>
+            <h2> Optimierung </h2>
+            <p> Bei Fragen oder Hinweisen kannst du dich an <!--<a href="mailto:emailadresse@hotmail.de">Name</a>--> wenden.</p>
+        </center>
+    </body>
+    
+    <script>
+        $("#newUser").hide()
+        var intervals = window.setInterval(validity,1000);
+        
+        function validity()
+        {
+            if(checkValid(localStorage.getItem("JwtToken"))==false)
+            {
+                    self.location="../index.html"
+            }
+            if(whatUser(localStorage.getItem("JwtToken"))!="Demir")
+            {
+                $("#newUser").hide()
+            }
+            else
+            {
+                $("#newUser").show()
+            }
+        }  
+        
+    </script>
+</html>

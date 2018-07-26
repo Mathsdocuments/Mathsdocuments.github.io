@@ -1,0 +1,68 @@
+﻿<html>
+    <style>
+        html 
+            { 
+              background: url(Images/Screenshot%20.jpg) no-repeat center center fixed; 
+              -webkit-background-size: cover;
+              -moz-background-size: cover;
+              -o-background-size: cover;
+              background-size: cover;
+            }
+    </style>
+    <head>
+        <title> Lösung deiner Probleme </title>
+        <link rel="stylesheet" href="Css/Mainstyles.css">
+        <script src="Js/aws-cognito.js"></script>
+        <script src="Js/jquery.js"></script>
+        <script src="Js/JS%20Main.js"></script>
+    </head>
+    <body>
+        <div id="backgroundColor"></div>
+        <div id="loginForm">
+            <center>
+                <p id="SignUpErrMsg"></p>
+                <input id="un" placeholder="username" type="text"> <br> <!-- un=username !-->
+                <input id="pw" placeholder="password" type="password"> <br><br> <!-- pw=password !-->
+                <button id="loginBtn" onClick="loginactivate();"> login </button>
+            </center>
+        </div>        
+    </body>
+    
+    <script>
+        /*var data = { UserPoolId : AdmimUserpoolID,
+        ClientId : AdminAppClientID
+        };
+        var userPool = new AmazonCognitoIdentity.CognitoUserPool(data);
+        var cognitoUser = userPool.getCurrentUser();
+
+        if (cognitoUser != null) {
+            cognitoUser.getSession(function(err, session) {
+                if (err) {
+                    alert(err);
+                    return;
+                }
+                console.log('session validity: ' + session.isValid());
+            });
+        }
+        cognitoUser.changePassword('OldPass', 'NEWPass', function(err, result) {
+        if (err) {
+            alert(err.message || JSON.stringify(err));
+            return;
+        }
+        console.log('call result: ' + result);
+        });
+        */
+        
+        $("#pw").keyup(function(event) {
+            if (event.keyCode === 13) {
+                $("#loginBtn").click();
+            }
+        });
+        function loginactivate()
+        {
+            var un = document.getElementById("un").value;
+            var pw = document.getElementById("pw").value;
+            Login(un, pw);
+        }
+    </script>
+</html>
